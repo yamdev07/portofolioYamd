@@ -1,40 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yoann Yamd - Portfolio</title>
-    <!-- Bootstrap CSS -->
+    <title>Yoann Yamd - Portfolio Cosmique</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
-        rel="stylesheet">
-
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="icon" type="image/png" sizes="180x180" href="favicon-180x180.png">
-
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
     <style>
-        :root {
-            --primary-color: #6366f1;
-            --secondary-color: #8b5cf6;
-            --accent-color: #06b6d4;
-            --text-primary: #1f2937;
-            --text-secondary: #6b7280;
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8fafc;
-            --bg-dark: #0f172a;
-            --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
-            --gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --shadow-medium: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
-            --shadow-large: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -43,327 +17,652 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--text-primary);
+            background: #000000;
+            color: white;
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-secondary);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--gradient-primary);
-            border-radius: 4px;
-        }
-
-        /* Navbar */
+        /* Navbar Cosmique */
         .navbar {
-            background: rgba(60, 69, 84, 0.95) !important;
-            backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.8) !important;
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
             padding: 1rem 0;
-        }
-
-        .navbar.scrolled {
-            padding: 0.5rem 0;
-            box-shadow: var(--shadow-medium);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
 
         .navbar-brand {
             font-weight: 800;
             font-size: 1.5rem;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: white !important;
         }
 
         .nav-link {
             color: rgba(255, 255, 255, 0.8) !important;
             font-weight: 500;
+            margin: 0 1rem;
             transition: all 0.3s ease;
-            position: relative;
-            margin: 0 0.5rem;
         }
 
         .nav-link:hover {
-            color: white !important;
-            transform: translateY(-2px);
+            color: #00d4ff !important;
         }
 
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gradient-primary);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
+        /* Hero Section Cosmique */
+        .cosmic-hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            background: var(--gradient-dark);
+            justify-content: center;
             position: relative;
+            overflow: hidden;
+            background: 
+                radial-gradient(ellipse at top, #0a0e27 0%, #000000 100%),
+                radial-gradient(ellipse at bottom, #0d1b2a 0%, #000000 100%);
+        }
+
+        /* Simulation spatiale 3D */
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            perspective: 800px;
             overflow: hidden;
         }
 
-        .hero::before {
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+        }
+
+        /* Étoiles très proches - grandes et brillantes */
+        .star-layer-1 {
+            width: 3px;
+            height: 3px;
+            box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.9);
+            animation: twinkle 2s infinite, floatClose 15s infinite linear;
+        }
+
+        /* Étoiles moyennes */
+        .star-layer-2 {
+            width: 2px;
+            height: 2px;
+            box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.7);
+            animation: twinkle 3s infinite, floatMid 25s infinite linear;
+        }
+
+        /* Étoiles lointaines - petites et nombreuses */
+        .star-layer-3 {
+            width: 1px;
+            height: 1px;
+            box-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
+            opacity: 0.7;
+            animation: twinkle 4s infinite, floatFar 35s infinite linear;
+        }
+
+        /* Étoiles très lointaines - poussière cosmique */
+        .star-layer-4 {
+            width: 1px;
+            height: 1px;
+            opacity: 0.3;
+            animation: twinkle 5s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { 
+                opacity: 0.2; 
+                transform: scale(0.8); 
+            }
+            50% { 
+                opacity: 1; 
+                transform: scale(1.2); 
+            }
+        }
+
+        @keyframes floatClose {
+            0% { 
+                transform: translateY(0) translateX(0) scale(1);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% { 
+                transform: translateY(100vh) translateX(-50px) scale(2);
+                opacity: 0;
+            }
+        }
+
+        @keyframes floatMid {
+            0% { 
+                transform: translateY(0) translateX(0) scale(1);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% { 
+                transform: translateY(100vh) translateX(-30px) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        @keyframes floatFar {
+            0% { 
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% { 
+                transform: translateY(100vh) translateX(-20px);
+                opacity: 0;
+            }
+        }
+
+        /* Nébuleuses */
+        .nebula {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.2;
+            animation: nebulaFloat 40s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        .nebula-1 {
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, #667eea 0%, #4c51bf 30%, transparent 70%);
+            top: -20%;
+            left: -15%;
+            animation-delay: 0s;
+        }
+
+        .nebula-2 {
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, #764ba2 0%, #5b3a7d 30%, transparent 70%);
+            top: 20%;
+            right: -15%;
+            animation-delay: 10s;
+        }
+
+        .nebula-3 {
+            width: 900px;
+            height: 900px;
+            background: radial-gradient(circle, #00d4ff 0%, #0099cc 30%, transparent 70%);
+            bottom: -25%;
+            left: 15%;
+            animation-delay: 20s;
+        }
+
+        .nebula-4 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #f093fb 0%, #c471ed 30%, transparent 70%);
+            top: 50%;
+            right: 10%;
+            animation-delay: 15s;
+        }
+
+        .nebula-5 {
+            width: 750px;
+            height: 750px;
+            background: radial-gradient(circle, #a8edea 0%, #6dd5ed 30%, transparent 70%);
+            bottom: 10%;
+            right: 30%;
+            animation-delay: 25s;
+        }
+
+        @keyframes nebulaFloat {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(40px, -40px) scale(1.1);
+            }
+            50% {
+                transform: translate(-30px, 50px) scale(0.9);
+            }
+            75% {
+                transform: translate(50px, 30px) scale(1.05);
+            }
+        }
+
+        /* Étoiles filantes */
+        .shooting-star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 15px 3px rgba(255, 255, 255, 1);
+        }
+
+        .shooting-star::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><radialGradient id="grad1" cx="50%" cy="50%" r="50%"><stop offset="0%" style="stop-color:%236366f1;stop-opacity:0.1" /><stop offset="100%" style="stop-color:%236366f1;stop-opacity:0" /></radialGradient></defs><circle cx="20" cy="20" r="2" fill="url(%23grad1)"><animate attributeName="opacity" values="0;1;0" dur="3s" repeatCount="indefinite"/></circle><circle cx="80" cy="30" r="1.5" fill="url(%23grad1)"><animate attributeName="opacity" values="0;1;0" dur="4s" repeatCount="indefinite" begin="1s"/></circle><circle cx="40" cy="70" r="1" fill="url(%23grad1)"><animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite" begin="2s"/></circle></svg>');
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 1), transparent);
+            transform: translateX(-80px) rotate(-45deg);
         }
 
+        .shooting-star-1 {
+            animation: shoot1 4s linear infinite;
+        }
+
+        .shooting-star-2 {
+            animation: shoot2 5s linear infinite;
+        }
+
+        .shooting-star-3 {
+            animation: shoot3 6s linear infinite;
+        }
+
+        .shooting-star-4 {
+            animation: shoot4 7s linear infinite;
+        }
+
+        @keyframes shoot1 {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-400px, 400px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes shoot2 {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-500px, 500px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes shoot3 {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-450px, 450px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes shoot4 {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-350px, 350px);
+                opacity: 0;
+            }
+        }
+
+        /* Planètes flottantes */
+        .floating-planet {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.3;
+            filter: blur(40px);
+        }
+
+        .planet1 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #667eea 0%, #764ba2 100%);
+            top: 10%;
+            left: 10%;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .planet2 {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, #f093fb 0%, #f5576c 100%);
+            bottom: 20%;
+            right: 10%;
+            animation: float 15s infinite ease-in-out reverse;
+        }
+
+        .planet3 {
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, #4facfe 0%, #00f2fe 100%);
+            top: 60%;
+            left: 5%;
+            animation: float 18s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px);
+            }
+            33% {
+                transform: translateY(-30px) translateX(20px);
+            }
+            66% {
+                transform: translateY(20px) translateX(-20px);
+            }
+        }
+
+        /* Contenu Hero */
         .hero-content {
             position: relative;
-            z-index: 2;
+            z-index: 10;
+            text-align: center;
+            padding: 2rem;
         }
 
-        .hero h1 {
+        .hero-title {
             font-size: clamp(3rem, 8vw, 6rem);
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 1.5rem;
-            background: var(--gradient-primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 5s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        /* Effet de curseur clignotant */
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.2em;
+            background: white;
+            margin-left: 5px;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .hero-description {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Boutons cosmiques */
+        .cosmic-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-cosmic {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: transparent;
+            color: white;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-cosmic:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #00d4ff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+            color: white;
+        }
+
+        .btn-cosmic-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+        }
+
+        .btn-cosmic-primary:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+        }
+
+        /* Navigation points */
+        .nav-dots {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot:hover, .nav-dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        /* Sections */
+        .section {
+            min-height: 100vh;
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #00d4ff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .hero .subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 2rem;
-            font-weight: 400;
-        }
-
-        .hero .tagline {
-            font-size: clamp(1rem, 2.5vw, 1.25rem);
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 3rem;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .btn-primary-custom {
-            background: var(--gradient-primary);
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary-custom:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-large);
-        }
-
-        .btn-secondary-custom {
-            background: transparent;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-        }
-
-        .btn-secondary-custom:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.5);
-            transform: translateY(-3px);
-            color: white;
-        }
-
-        /* Floating Elements */
-        .floating-elements {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .floating-element {
-            position: absolute;
-            background: var(--gradient-primary);
-            border-radius: 50%;
-            opacity: 0.1;
-            animation: float 15s infinite ease-in-out;
-        }
-
-        .floating-element:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            top: 10%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .floating-element:nth-child(2) {
-            width: 120px;
-            height: 120px;
-            top: 70%;
-            right: 10%;
-            animation-delay: 5s;
-        }
-
-        .floating-element:nth-child(3) {
-            width: 60px;
-            height: 60px;
-            bottom: 20%;
-            left: 20%;
-            animation-delay: 10s;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0px) rotate(0deg);
-            }
-
-            33% {
-                transform: translateY(-30px) rotate(120deg);
-            }
-
-            66% {
-                transform: translateY(20px) rotate(240deg);
-            }
-        }
-
-        /* Sections */
-        .section {
-            padding: 120px 0;
-        }
-
-        .section-title {
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 1rem;
-            position: relative;
-        }
-
         .section-subtitle {
             text-align: center;
             font-size: 1.25rem;
-            color: var(--text-secondary);
+            color: rgba(255, 255, 255, 0.7);
             margin-bottom: 4rem;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
-        }
-
-        .skill-card {
-            background: var(--bg-primary);
+        /* Cards cosmiques */
+        .cosmic-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
             padding: 2.5rem;
-            box-shadow: var(--shadow-soft);
+            backdrop-filter: blur(10px);
             transition: all 0.3s ease;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            position: relative;
-            overflow: hidden;
+            height: 100%;
         }
 
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-primary);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .skill-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .skill-card:hover {
+        .cosmic-card:hover {
             transform: translateY(-10px);
-            box-shadow: var(--shadow-medium);
+            border-color: rgba(0, 212, 255, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
         }
 
         .skill-icon {
             width: 60px;
             height: 60px;
-            background: var(--gradient-primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 1.5rem;
-            color: white;
             font-size: 1.5rem;
         }
 
-        .skill-card h5 {
+        /* Filtres de compétences */
+        .skills-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            border-color: rgba(102, 126, 234, 0.5);
+            background: rgba(102, 126, 234, 0.1);
+            color: white;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: transparent;
+            color: white;
+        }
+
+        /* Grid de compétences nouveau style */
+        .skills-grid-new {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card-new {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .skill-card-new:hover {
+            transform: translateY(-5px);
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .skill-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
+            color: white;
         }
 
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
+        .skill-info h5 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
         }
 
-        .skill-tag {
-            background: rgba(99, 102, 241, 0.1);
-            color: var(--primary-color);
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            font-size: 0.875rem;
-            font-weight: 500;
+        .skill-info p {
+            margin: 0.25rem 0 0 0;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
         }
 
-        /* Projects Section */
+        .skill-progress {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .skill-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #00d4ff 100%);
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        .skill-card-new[data-category].hidden {
+            display: none;
+        }
+
+        /* Projects Grid */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -371,102 +670,17 @@
             margin-top: 4rem;
         }
 
-        .project-card {
-            background: var(--bg-primary);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow-soft);
-            transition: all 0.3s ease;
-            position: relative;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-medium);
-        }
-
         .project-header {
             height: 200px;
-            background: var(--gradient-primary);
-            position: relative;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
             font-size: 3rem;
+            border-radius: 20px 20px 0 0;
         }
 
-        .project-body {
-            padding: 2rem;
-        }
-
-        .project-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .project-description {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .tech-tag {
-            background: var(--bg-secondary);
-            color: var(--text-secondary);
-            padding: 0.25rem 0.75rem;
-            border-radius: 15px;
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .project-link {
-            padding: 0.75rem 1.5rem;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .project-link.primary {
-            background: var(--gradient-primary);
-            color: white;
-        }
-
-        .project-link.secondary {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-        }
-
-        .project-link:hover {
-            transform: translateY(-2px);
-            text-decoration: none;
-        }
-
-        /* Contact Section */
-        .contact-section {
-            background: var(--gradient-dark);
-            color: white;
-        }
-
+        /* Contact cosmique */
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -487,23 +701,19 @@
         .contact-item:hover {
             background: rgba(255, 255, 255, 0.1);
             transform: translateY(-5px);
+            border-color: rgba(0, 212, 255, 0.5);
         }
 
         .contact-icon {
             width: 60px;
             height: 60px;
-            background: var(--gradient-primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1rem;
             font-size: 1.5rem;
-        }
-
-        .contact-item h5 {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
         }
 
         .contact-item a {
@@ -513,62 +723,18 @@
         }
 
         .contact-item a:hover {
-            color: white;
+            color: #00d4ff;
         }
 
         /* Footer */
         .footer {
-            background: var(--bg-dark);
-            color: rgba(255, 255, 255, 0.6);
+            background: rgba(0, 0, 0, 0.8);
             text-align: center;
             padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease forwards;
-        }
-
-        .fade-in-delay {
-            animation-delay: 0.2s;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .cta-buttons {
-                justify-content: center;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .hero {
-                padding: 2rem 0;
-            }
-
-            .section {
-                padding: 80px 0;
-            }
-
-            .skills-grid,
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Scroll Animations */
+        /* Animations de révélation */
         .reveal {
             opacity: 0;
             transform: translateY(50px);
@@ -579,152 +745,288 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-dots {
+                display: none;
+            }
+            
+            .cosmic-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
-
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNavbar">
+    <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <!-- Logo -->
-            <a class="navbar-brand" href="index.html">
-                <img src="logo-removebg-preview.png" alt="Logo" height="40" class="d-inline-block align-text-top">
-            </a>
-
-            <!-- Bouton mobile -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="#home">yamdev07</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-            <!-- Liens -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#competences">Compétences</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#projets">Projets</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#home">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#competences">Compétences</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projets">Projets</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Style supplémentaire -->
-    <style>
-        .navbar-brand img {
-            height: 45px;
-            /* Taille un peu plus grande */
-            width: auto;
-            vertical-align: middle;
-            border-radius: 8px;
-            /* Coins arrondis */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            /* Ombre douce */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .navbar-brand img:hover {
-            transform: scale(1.1);
-            /* Zoom léger au survol */
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
-        }
-    </style>
-
+    <!-- Navigation Dots -->
+    <div class="nav-dots">
+        <div class="nav-dot active" data-section="home"></div>
+        <div class="nav-dot" data-section="competences"></div>
+        <div class="nav-dot" data-section="projets"></div>
+        <div class="nav-dot" data-section="contact"></div>
+    </div>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="floating-elements">
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-        </div>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10 text-center hero-content">
-                    <h1 class="fade-in">yamdev07</h1>
-                    <p class="subtitle fade-in fade-in-delay">Développeur Fullstack & Ingénieur Réseau</p>
-                    <p class="tagline fade-in fade-in-delay">Passionné par l'innovation technologique et la création de
-                        solutions digitales performantes</p>
-                    <div class="cta-buttons fade-in fade-in-delay">
-                        <a href="#projets" class="btn btn-primary-custom">
-                            <i class="fas fa-rocket me-2"></i>Voir mes projets
-                        </a>
-                        <a href="tel: +22990422588" class="btn btn-secondary-custom">
-                            <i class="fas fa-envelope me-2"></i>Me contacter
-                        </a>
-                        <a href="https://cvdesignr.com/p/668be84f74319" class="btn btn-primary-custom">
-                            <i class="fas fa-envelope me-2"></i>Voir mon CV
-                        </a>
-                    </div>
-                </div>
+    <section class="cosmic-hero" id="home">
+        <!-- Nébuleuses -->
+        <div class="nebula nebula-1"></div>
+        <div class="nebula nebula-2"></div>
+        <div class="nebula nebula-3"></div>
+        <div class="nebula nebula-4"></div>
+        <div class="nebula nebula-5"></div>
+
+        <!-- Étoiles 3D -->
+        <div class="stars" id="starsContainer"></div>
+        
+        <!-- Étoiles filantes -->
+        <div class="shooting-star shooting-star-1" style="top: 15%; left: 85%;"></div>
+        <div class="shooting-star shooting-star-2" style="top: 35%; left: 75%;"></div>
+        <div class="shooting-star shooting-star-3" style="top: 55%; left: 90%;"></div>
+        <div class="shooting-star shooting-star-4" style="top: 25%; left: 65%;"></div>
+        <div class="shooting-star shooting-star-1" style="top: 70%; left: 80%; animation-delay: 2s;"></div>
+        <div class="shooting-star shooting-star-2" style="top: 45%; left: 95%; animation-delay: 3s;"></div>
+        
+        <!-- Planètes 3D -->
+        <div class="floating-planet planet1"></div>
+        <div class="floating-planet planet2"></div>
+        <div class="floating-planet planet3"></div>
+
+        <div class="hero-content">
+            <h1 class="hero-title">Bonjour, je suis Yoann Yamd</h1>
+            <p class="hero-subtitle">Développeur Fullstack<span class="typing-cursor"></span></p>
+            <p class="hero-description">
+                Bienvenue dans mon portfolio cosmique. Découvrez mes projets et voyez comment je marie créativité et technologie pour créer des expériences numériques uniques.
+            </p>
+            <div class="cosmic-buttons">
+                <a href="#projets" class="btn-cosmic btn-cosmic-primary">
+                    <i class="fas fa-rocket"></i> Voir mes Projets
+                </a>
+                <a href="#contact" class="btn-cosmic">
+                    <i class="fas fa-envelope"></i> Contactez-moi
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Compétences Section -->
-    <section id="competences" class="section bg-light">
+    <section id="competences" class="section">
         <div class="container">
             <div class="reveal">
-                <h2 class="section-title">Compétences & Expertise</h2>
-                <p class="section-subtitle">
-                    Une expertise technique diversifiée pour répondre à tous vos besoins de développement
-                </p>
+                <h2 class="section-title">Mes <span style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Compétences</span></h2>
             </div>
 
-            <div class="skills-grid">
-                <div class="skill-card reveal">
-                    <div class="skill-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h5>Langages de Programmation</h5>
-                    <p>Maîtrise approfondie des langages modernes pour développer des applications robustes et
-                        scalables.</p>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">PHP</span>
-                        <span class="skill-tag">Java</span>
-                        <span class="skill-tag">Dart</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">TypeScript</span>
+            <!-- Filtres -->
+            <div class="skills-filters reveal" style="margin-top: 3rem;">
+                <button class="filter-btn active" data-filter="all">Toutes les Compétences</button>
+                <button class="filter-btn" data-filter="frontend">Développement Frontend</button>
+                <button class="filter-btn" data-filter="backend">Développement Backend</button>
+                <button class="filter-btn" data-filter="tools">Outils de Développement</button>
+                <button class="filter-btn" data-filter="cloud">Technologies Cloud</button>
+            </div>
 
+            <!-- Grid de compétences -->
+            <div class="skills-grid-new" style="margin-top: 3rem;">
+                <!-- HTML/CSS -->
+                <div class="skill-card-new reveal" data-category="frontend">
+                    <div class="skill-avatar" style="background: linear-gradient(135deg, #e44d26 0%, #f16529 100%);">H</div>
+                    <div class="skill-info">
+                        <h5>HTML/CSS</h5>
+                        <p>Développement Frontend</p>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 95%;"></div>
                     </div>
                 </div>
 
-                <div class="skill-card reveal">
-                    <div class="skill-icon">
-                        <i class="fas fa-layer-group"></i>
+                <!-- JavaScript -->
+                <div class="skill-card-new reveal" data-category="frontend">
+                    <div class="skill-avatar" style="background: linear-gradient(135deg, #f7df1e 0%, #f0db4f 100%);">J</div>
+                    <div class="skill-info">
+                        <h5>JavaScript</h5>
+                        <p>Développement Frontend</p>
                     </div>
-                    <h5>Frameworks & Libraries</h5>
-                    <p>Utilisation des frameworks les plus performants pour accélérer le développement et optimiser les
-                        performances.</p>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Laravel</span>
-                        <span class="skill-tag">Django</span>
-                        <span class="skill-tag">Flask</span>
-                        <span class="skill-tag">Flutter</span>
-                        <span class="skill-tag">Bootstrap</span>
-                        <span class="skill-tag">Tailwind CSS</span>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 90%;"></div>
                     </div>
                 </div>
 
-                <div class="skill-card reveal">
-                    <div class="skill-icon">
-                        <i class="fas fa-database"></i>
+                <!-- TypeScript -->
+                <div class="skill-card-new reveal" data-category="frontend">
+                    <div class="skill-avatar" style="background: linear-gradient(135deg, #3178c6 0%, #235a97 100%);">T</div>
+                    <div class="skill-info">
+                        <h5>TypeScript</h5>
+                        <p>Développement Frontend</p>
                     </div>
-                    <h5>Bases de Données & DevOps</h5>
-                    <p>Gestion complète des données et déploiement d'applications avec les meilleures pratiques DevOps.
-                    </p>
-                    <div class="skill-tags">
-                        <span class="skill-tag">MySQL</span>
-                        <span class="skill-tag">PostgreSQL</span>
-                        <span class="skill-tag">Firebase</span>
-                        <span class="skill-tag">Git/GitHub</span>
-                        <span class="skill-tag">Docker</span>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 85%;"></div>
+                    </div>
+                </div>
+
+                <!-- React -->
+                <div class="skill-card-new reveal" data-category="frontend">
+                    <div class="skill-avatar" style="background: linear-gradient(135deg, #61dafb 0%, #21a1c4 100%);">R</div>
+                    <div class="skill-info">
+                        <h5>React</h5>
+                        <p>Développement Frontend</p>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 88%;"></div>
+                    </div>
+                </div>
+
+                <!-- Tailwind CSS -->
+                <div class="skill-card-new reveal" data-category="frontend">
+                    <div class="skill-avatar" style="background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);">T</div>
+                    <div class="skill-info">
+                        <h5>Tailwind CSS</h5>
+                        <p>Développement Frontend</p>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 92%;"></div>
+                    </div>
+                </div>
+
+                <!-- Python -->
+                <div class="skill-card-new reveal" data-category="backend">
+                    <div class="skill-avatar" style="background: linear-gradient(135deg, #3776ab 0%, #ffd343 100%);">P</div>
+                    <div class="skill-info">
+                        <h5>Python</h5>
+                        <p>Développement Backend</p>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 93%;"></div>
+                    </div>
+                </div>
+
+                <!-- Django -->
+                <div class="skill-card-new reveal" data-category="backend">
+                    <div class="skill-avatar" style="background: linear-gradient(135deg, #092e20 0%, #0c4b33 100%);">D</div>
+                    <div class="skill-info">
+                        <h5>Django</h5>
+                        <p>Développement Backend</p>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 90%;"></div>
+                    </div>
+                </div>
+
+                <!-- PHP -->
+                <div class="skill-card-new reveal" data-category="backend">
+                    <div class="skill-avatar" style="background: linear-gradient(135deg, #777bb4 0%, #8892bf 100%);">P</div>
+                    <div class="skill-info">
+                        <h5>PHP</h5>
+                        <p>Développement Backend</p>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 88%;"></div>
+                    </div>
+                </div>
+
+                <!-- Laravel -->
+                <div class="skill-card-new reveal" data-category="backend">
+                    <div class="skill-avatar" style="background: linear-gradient(135deg, #ff2d20 0%, #ff5a4d 100%);">L</div>
+                    <div class="skill-info">
+                        <h5>Laravel</h5>
+                        <p>Développement Backend</p>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 91%;"></div>
+                    </div>
+                </div>
+
+                <!-- MySQL -->
+                <div class="skill-card-new reveal" data-category="backend">
+                    <div class="skill-avatar" style="background: linear-gradient(135deg, #00758f 0%, #f29111 100%);">M</div>
+                    <div class="skill-info">
+                        <h5>MySQL</h5>
+                        <p>Développement Backend</p>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 89%;"></div>
+                    </div>
+                </div>
+
+                <!-- PostgreSQL -->
+                <div class="skill-card-new reveal" data-category="backend">
+                    <div class="skill-avatar" style="background: linear-gradient(135deg, #336791 0%, #4169e1 100%);">P</div>
+                    <div class="skill-info">
+                        <h5>PostgreSQL</h5>
+                        <p>Développement Backend</p>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 87%;"></div>
+                    </div>
+                </div>
+
+                <!-- Git -->
+                <div class="skill-card-new reveal" data-category="tools">
+                    <div class="skill-avatar" style="background: linear-gradient(135deg, #f05032 0%, #dd4c35 100%);">G</div>
+                    <div class="skill-info">
+                        <h5>Git</h5>
+                        <p>Outils de Développement</p>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 94%;"></div>
+                    </div>
+                </div>
+
+                <!-- Docker -->
+                <div class="skill-card-new reveal" data-category="tools">
+                    <div class="skill-avatar" style="background: linear-gradient(135deg, #2496ed 0%, #0db7ed 100%);">D</div>
+                    <div class="skill-info">
+                        <h5>Docker</h5>
+                        <p>Outils de Développement</p>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 82%;"></div>
+                    </div>
+                </div>
+
+                <!-- CI/CD -->
+                <div class="skill-card-new reveal" data-category="tools">
+                    <div class="skill-avatar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">C</div>
+                    <div class="skill-info">
+                        <h5>CI/CD</h5>
+                        <p>Outils de Développement</p>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 80%;"></div>
+                    </div>
+                </div>
+
+                <!-- Firebase -->
+                <div class="skill-card-new reveal" data-category="cloud">
+                    <div class="skill-avatar" style="background: linear-gradient(135deg, #ffca28 0%, #ffa000 100%);">F</div>
+                    <div class="skill-info">
+                        <h5>Firebase</h5>
+                        <p>Technologies Cloud</p>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 85%;"></div>
                     </div>
                 </div>
             </div>
@@ -742,225 +1044,197 @@
             </div>
 
             <div class="projects-grid">
-                <!-- Projet 1 -->
-                <div class="project-card reveal">
+                <!-- Projet 1: BibliothèqueApp -->
+                <div class="cosmic-card reveal">
                     <div class="project-header">
                         <i class="fas fa-book"></i>
                     </div>
-                    <div class="project-body">
-                        <h3 class="project-title">BibliothèqueApp – Gestion de bibliothèque</h3>
-                        <p class="project-description">
-                            Application pour gérer une bibliothèque : suivi des livres, gestion des emprunts/retours,
-                            utilisateurs, gestion des administrateurs et intégration d’un système de chat en temps réel.
+                    <div style="padding: 2rem;">
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">BibliothèqueApp</h3>
+                        <p style="color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;">
+                            Application pour gérer une bibliothèque : suivi des livres, gestion des emprunts/retours, utilisateurs, gestion des administrateurs et intégration d'un système de chat en temps réel.
                         </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Django</span>
-                            <span class="tech-tag">MySQL</span>
-                            <span class="tech-tag">Chat Integration</span>
-                            <span class="tech-tag">Admin Management</span>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Django</span>
+                            <span class="skill-tag">MySQL</span>
+                            <span class="skill-tag">Chat</span>
                         </div>
-                        <div class="project-links">
-                            <a href="https://github.com/yamdev07/BibliothequeApp" class="project-link primary"
-                                target="_blank">
+                        <div style="margin-top: 1.5rem;">
+                            <a href="https://github.com/yamdev07/BibliothequeApp" class="btn-cosmic" target="_blank">
                                 <i class="fab fa-github"></i> GitHub
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Projet 2 -->
-                <div class="project-card reveal">
+                <!-- Projet 2: Site Vitrine AnyxTech -->
+                <div class="cosmic-card reveal">
                     <div class="project-header">
                         <i class="fas fa-laptop-code"></i>
                     </div>
-                    <div class="project-body">
-                        <h3 class="project-title">Site Vitrine AnyxTech</h3>
-                        <p class="project-description">
-                            Site web professionnel responsive avec design moderne, optimisé pour les performances et le
-                            SEO.
+                    <div style="padding: 2rem;">
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Site Vitrine AnyxTech</h3>
+                        <p style="color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;">
+                            Site web professionnel responsive avec design moderne, optimisé pour les performances et le SEO.
                         </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">HTML/CSS</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">Tailwind CSS</span>
-                            <span class="tech-tag">Responsive Design</span>
-                            <span class="tech-tag">SEO</span>
+                        <div class="skill-tags">
+                            <span class="skill-tag">HTML/CSS</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">Tailwind CSS</span>
                         </div>
-                        <div class="project-links">
-                            <a href="https://anyxtech.com" class="project-link primary" target="_blank">
-                                <i class="fab fa-globe"></i> voir en ligne
+                        <div style="margin-top: 1.5rem;">
+                            <a href="https://anyxtech.com" class="btn-cosmic" target="_blank">
+                                <i class="fas fa-globe"></i> Voir en ligne
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Projet 3 -->
-                <div class="project-card reveal">
+                <!-- Projet 3: Task Management System -->
+                <div class="cosmic-card reveal">
                     <div class="project-header">
                         <i class="fas fa-tasks"></i>
                     </div>
-                    <div class="project-body">
-                        <h3 class="project-title">Task Management System</h3>
-                        <p class="project-description">
-                            Application complète de gestion de clientèle avec intégration Twilio API pour les
-                            notifications SMS et interface Bootstrap moderne.
+                    <div style="padding: 2rem;">
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Task Management System</h3>
+                        <p style="color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;">
+                            Application complète de gestion de clientèle avec intégration Twilio API pour les notifications SMS et interface Bootstrap moderne.
                         </p>
-                        <p class="project-description"> <strong> NB: Cette application est déjà disponible en ligne , utilisée par la dite entreprise mais ne peux en aucun cas être divulgué au public</strong></p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Laravel</span>
-                            <span class="tech-tag">Twilio API</span>
-                            <span class="tech-tag">Bootstrap</span>
-                            <span class="tech-tag">MySQL</span>
+                        <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-bottom: 1.5rem;">
+                            <strong>NB:</strong> Cette application est déjà disponible en ligne, utilisée par la dite entreprise mais ne peut en aucun cas être divulguée au public.
+                        </p>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Laravel</span>
+                            <span class="skill-tag">Twilio API</span>
+                            <span class="skill-tag">Bootstrap</span>
+                            <span class="skill-tag">MySQL</span>
                         </div>
-                        <div class="project-links">
-                            <a href="https://github.com/yamdev07/TaskManagement" class="project-link primary"
-                                target="_blank">
+                        <div style="margin-top: 1.5rem;">
+                            <a href="https://github.com/yamdev07/TaskManagement" class="btn-cosmic" target="_blank">
                                 <i class="fab fa-github"></i> GitHub
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Projet 4 -->
-                <div class="project-card reveal">
+                <!-- Projet 4: CunicultureApp -->
+                <div class="cosmic-card reveal">
                     <div class="project-header">
                         <i class="fas fa-rabbit"></i>
                     </div>
-                    <div class="project-body">
-                        <h3 class="project-title">CunicultureApp – Gestion d'élevage de lapins</h3>
-                        <p class="project-description">
-                            Application de suivi et gestion de la production cunicole : suivi des lapins, gestion des
-                            naissances, alimentation, santé et productivité.
+                    <div style="padding: 2rem;">
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">CunicultureApp</h3>
+                        <p style="color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;">
+                            Application de suivi et gestion de la production cunicole : suivi des lapins, gestion des naissances, alimentation, santé et productivité.
                         </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">PHP</span>
-                            <span class="tech-tag">Laravel</span>
-                            <span class="tech-tag">MVC</span>
-                            <span class="tech-tag">MySQL</span>
-                            <span class="tech-tag">API Restful</span>
+                        <div class="skill-tags">
+                            <span class="skill-tag">PHP</span>
+                            <span class="skill-tag">Laravel</span>
+                            <span class="skill-tag">MVC</span>
+                            <span class="skill-tag">MySQL</span>
                         </div>
-                        <div class="project-links">
-                            <a href="https://github.com/yamdev07/CunicultureApp" class="project-link primary"
-                                target="_blank">
+                        <div style="margin-top: 1.5rem;">
+                            <a href="https://github.com/yamdev07/CunicultureApp" class="btn-cosmic" target="_blank">
                                 <i class="fab fa-github"></i> GitHub
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Projet MoradaLodge -->
-                <div class="project-card reveal">
+                <!-- Projet 5: MoradaLodge -->
+                <div class="cosmic-card reveal">
                     <div class="project-header">
                         <i class="fas fa-hotel"></i>
                     </div>
-                    <div class="project-body">
-                        <h3 class="project-title">MoradaLodge – Site hôtelier avec QloApps</h3>
-                        <p class="project-description">
-                            Site web d'hôtel entièrement configuré avec QloApps, incluant un back-office pour gérer les
-                            réservations, les chambres et le contenu du site.
+                    <div style="padding: 2rem;">
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">MoradaLodge</h3>
+                        <p style="color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;">
+                            Site web d'hôtel entièrement configuré avec QloApps, incluant un back-office pour gérer les réservations, les chambres et le contenu du site.
                         </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">QloApps</span>
-                            <span class="tech-tag">PHP</span>
-                            <span class="tech-tag">MySQL</span>
-                            <span class="tech-tag">Back-office</span>
-                            <span class="tech-tag">Responsive Design</span>
+                        <div class="skill-tags">
+                            <span class="skill-tag">QloApps</span>
+                            <span class="skill-tag">PHP</span>
+                            <span class="skill-tag">MySQL</span>
+                            <span class="skill-tag">Back-office</span>
                         </div>
-                        <div class="project-links">
-                            <a href="http://moradalodge.com" class="project-link primary" target="_blank">
-                                <i class="fas fa-globe"></i> Voir en ligne
+                        <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <a href="http://moradalodge.com" class="btn-cosmic" target="_blank">
+                                <i class="fas fa-globe"></i> Site
                             </a>
-                            <a href="http://moradalodge.com/admin2025" class="project-link secondary" target="_blank">
-                                <i class="fas fa-user-cog"></i> Back-office
+                            <a href="http://moradalodge.com/admin2025" class="btn-cosmic" target="_blank">
+                                <i class="fas fa-user-cog"></i> Admin
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Projet FaceVisionPro -->
-                <div class="project-card reveal">
+                <!-- Projet 6: FaceVisionPro -->
+                <div class="cosmic-card reveal">
                     <div class="project-header">
                         <i class="fas fa-id-card-alt"></i>
                     </div>
-                    <div class="project-body">
-                        <h3 class="project-title">FaceVisionPro WebAPP de reconnaissance faciale et OCR</h3>
-                        <p class="project-description">
-                            Plateforme avancée d'analyse faciale et de reconnaissance de texte utilisant l'intelligence
-                            artificielle de pointe.
+                    <div style="padding: 2rem;">
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">FaceVisionPro</h3>
+                        <p style="color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;">
+                            WebApp de reconnaissance faciale et OCR - Plateforme avancée d'analyse faciale et de reconnaissance de texte utilisant l'intelligence artificielle de pointe.
                         </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Pycharm</span>
-                            <span class="tech-tag">Algorithmes de deep learning pour une précision maximale</span>
-                            <span class="tech-tag">Streamlit</span>
-                            <span class="tech-tag">Traitement instantané avec latence minimale</span>
-                            <span class="tech-tag">Chiffrement des données et conformité RGPD</span>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Deep Learning</span>
+                            <span class="skill-tag">Streamlit</span>
+                            <span class="skill-tag">OCR</span>
                         </div>
-                        <div class="project-links">
-                            <a href="https://github.com/yamdev07/ANIPChallenge2" class="project-link primary"
-                                target="_blank">
+                        <div style="margin-top: 1.5rem;">
+                            <a href="https://github.com/yamdev07/ANIPChallenge2" class="btn-cosmic" target="_blank">
                                 <i class="fab fa-github"></i> GitHub
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Projet QuincaillerieApp -->
-                <div class="project-card reveal">
+                <!-- Projet 7: QuincaillerieApp -->
+                <div class="cosmic-card reveal">
                     <div class="project-header">
                         <i class="fas fa-tools"></i>
                     </div>
-                    <div class="project-body">
-                        <h3 class="project-title">QuincaillerieApp</h3>
-                        <p class="project-description">
-                            Application complète de <strong>gestion de quincaillerie</strong> permettant de suivre les
-                            ventes,
-                            gérer le stock et automatiser les factures clients .
-                            L'interface moderne et responsive est conçue avec <strong>Bootstrap</strong>, tandis que le
-                            back-end
-                            robuste utilise <strong>Laravel</strong> et <strong>MySQL</strong> pour une gestion efficace
-                            et sécurisée
-                            des données integrant une interface utilisateur et administrateur.
+                    <div style="padding: 2rem;">
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">QuincaillerieApp</h3>
+                        <p style="color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;">
+                            Application complète de gestion de quincaillerie permettant de suivre les ventes, gérer le stock et automatiser les factures clients. Interface utilisateur et administrateur intégrée.
                         </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Laravel</span>
-                            <span class="tech-tag">billing</span>
-                            <span class="tech-tag">Bootstrap</span>
-                            <span class="tech-tag">MySQL</span>
-                            <span class="tech-tag">Gestion rôle</span>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Laravel</span>
+                            <span class="skill-tag">Billing</span>
+                            <span class="skill-tag">Bootstrap</span>
+                            <span class="skill-tag">MySQL</span>
                         </div>
-                        <div class="project-links">
-                            <a href="https://github.com/yamdev07/quincaillerieApp" class="project-link primary"
-                                target="_blank">
+                        <div style="margin-top: 1.5rem;">
+                            <a href="https://github.com/yamdev07/quincaillerieApp" class="btn-cosmic" target="_blank">
                                 <i class="fab fa-github"></i> GitHub
                             </a>
                         </div>
                     </div>
                 </div>
 
-
-                <!-- Projet Wifizone – Portail Captif -->
-                <div class="project-card reveal">
+                <!-- Projet 8: Wifizone - Portail Captif -->
+                <div class="cosmic-card reveal">
                     <div class="project-header">
                         <i class="fas fa-wifi"></i>
                     </div>
-                    <div class="project-body">
-                        <h3 class="project-title">Wifizone – Portail Captif Wi-Fi</h3>
-                        <p class="project-description">
-                            Création et configuration d'un portail captif pour Wifizone, permettant un accès sécurisé au
-                            réseau Wi-Fi pour les utilisateurs, intégration Fedapay pour le paiement en ligne, avec gestion des sessions et authentification
-                            personnalisée.
+                    <div style="padding: 2rem;">
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Wifizone - Portail Captif</h3>
+                        <p style="color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;">
+                            Création et configuration d'un portail captif pour Wifizone, permettant un accès sécurisé au réseau Wi-Fi, intégration Fedapay pour le paiement en ligne, avec gestion des sessions et authentification personnalisée.
                         </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Wi-Fi</span>
-                            <span class="tech-tag">Portail Captif</span>
-                            <span class="tech-tag">Sécurité Réseau</span>
-                            <span class="tech-tag">Authentification</span>
-                            <span class="tech-tag">Gestion des sessions</span>
-                            <span class="tech-tag">Intégration Fedapay</span>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Wi-Fi</span>
+                            <span class="skill-tag">Portail Captif</span>
+                            <span class="skill-tag">Fedapay</span>
+                            <span class="skill-tag">Sécurité</span>
                         </div>
-                        <div class="project-links">
-                            <a href="https://wifihostpo.netlify.app/" class="project-link primary" target="_blank">
+                        <div style="margin-top: 1.5rem;">
+                            <a href="https://wifihostpo.netlify.app/" class="btn-cosmic" target="_blank">
                                 <i class="fas fa-globe"></i> Démo / Accès
                             </a>
                         </div>
@@ -971,7 +1245,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="section contact-section">
+    <section id="contact" class="section">
         <div class="container">
             <div class="reveal">
                 <h2 class="section-title">Collaborons Ensemble</h2>
@@ -1002,16 +1276,15 @@
                         <i class="fab fa-linkedin"></i>
                     </div>
                     <h5>LinkedIn</h5>
-                    <a href="https://www.linkedin.com/in/yoann-adigbonon-71b1a6295"
-                        target="_blank">linkedin.com/in/yoann-yamd</a>
+                    <a href="https://www.linkedin.com/in/yoann-adigbonon-71b1a6295" target="_blank">LinkedIn Profile</a>
                 </div>
 
                 <div class="contact-item reveal">
                     <div class="contact-icon">
                         <i class="fas fa-phone"></i>
                     </div>
-                    <h5>Consultation</h5>
-                    <a href="tel:+22990422588">Appeler maintenant</a>
+                    <h5>Téléphone</h5>
+                    <a href="tel:+22990422588">+229 90 42 25 88</a>
                 </div>
             </div>
         </div>
@@ -1024,55 +1297,170 @@
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
     <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', function () {
-            const navbar = document.getElementById('mainNavbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
+        // Générer les étoiles en 4 couches avec beaucoup plus de densité
+        const starsContainer = document.getElementById('starsContainer');
+        
+        // Layer 1 : Étoiles très proches (grandes et brillantes) - 80 étoiles
+        for (let i = 0; i < 80; i++) {
+            const star = document.createElement('div');
+            star.className = 'star star-layer-1';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 15 + 's';
+            star.style.animationDuration = (Math.random() * 5 + 15) + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Layer 2 : Étoiles moyennes - 150 étoiles
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.className = 'star star-layer-2';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 25 + 's';
+            star.style.animationDuration = (Math.random() * 8 + 25) + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Layer 3 : Étoiles lointaines - 300 étoiles
+        for (let i = 0; i < 300; i++) {
+            const star = document.createElement('div');
+            star.className = 'star star-layer-3';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 35 + 's';
+            star.style.animationDuration = (Math.random() * 10 + 35) + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Layer 4 : Poussière d'étoiles - 400 étoiles très petites
+        for (let i = 0; i < 400; i++) {
+            const star = document.createElement('div');
+            star.className = 'star star-layer-4';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 5 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Effet parallax amélioré sur les planètes et nébuleuses
+        let mouseX = 0;
+        let mouseY = 0;
+        let currentX = 0;
+        let currentY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+            mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
         });
 
-        // Reveal animation on scroll
+        function animate() {
+            currentX += (mouseX - currentX) * 0.05;
+            currentY += (mouseY - currentY) * 0.05;
+
+            document.querySelectorAll('.floating-planet').forEach((planet, index) => {
+                const speed = (index + 1) * 20;
+                const x = currentX * speed;
+                const y = currentY * speed;
+                planet.style.transform = `translate(${x}px, ${y}px)`;
+            });
+
+            document.querySelectorAll('.nebula').forEach((nebula, index) => {
+                const speed = (index + 1) * 8;
+                const x = currentX * speed;
+                const y = currentY * speed;
+                nebula.style.transform = `translate(${x}px, ${y}px)`;
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        // Révéler les éléments au scroll
         function reveal() {
             const reveals = document.querySelectorAll('.reveal');
-
-            for (let i = 0; i < reveals.length; i++) {
+            reveals.forEach(el => {
                 const windowHeight = window.innerHeight;
-                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementTop = el.getBoundingClientRect().top;
                 const elementVisible = 150;
-
                 if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add('active');
+                    el.classList.add('active');
                 }
-            }
+            });
         }
 
         window.addEventListener('scroll', reveal);
+        reveal();
 
-        // Smooth scrolling for navigation links
+        // Navigation dots
+        const navDots = document.querySelectorAll('.nav-dot');
+        const sections = ['home', 'competences', 'projets', 'contact'];
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const element = document.getElementById(section);
+                const rect = element.getBoundingClientRect();
+                if (rect.top <= 100 && rect.bottom >= 100) {
+                    current = section;
+                }
+            });
+            
+            navDots.forEach(dot => {
+                dot.classList.remove('active');
+                if (dot.dataset.section === current) {
+                    dot.classList.add('active');
+                }
+            });
+        });
+
+        navDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const section = document.getElementById(dot.dataset.section);
+                section.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Filtres de compétences
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const skillCards = document.querySelectorAll('.skill-card-new');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+
+                skillCards.forEach(card => {
+                    if (filter === 'all') {
+                        card.classList.remove('hidden');
+                    } else {
+                        if (card.dataset.category === filter) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+        });
+
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    target.scrollIntoView({ behavior: 'smooth' });
                 }
             });
-         });
-
-        // Initial reveal check
-        document.addEventListener('DOMContentLoaded', reveal);
+        });
     </script>
-
 </body>
-
 </html>
